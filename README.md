@@ -15,23 +15,20 @@ http://3.80.58.96/
 **Líneas y términos de interés**
 ------------
 - CRUD: Create, Read, Update, Delete. Un sistema sencillo para trabajar registros de base de datos.
--
--
--
--
--
--
--
--
-
+- MySQLi: controlador de base de datos usado en php. Aparece en numerosos comandos a lo largo de la práctica.
+- $stmt: 'statement' es una variable de propósito general, como puede serlo 'foo' o 'bar'. Usado en con MySQLi en diversas líneas.
+- jumbotron: Aparece en un <div> y es una caja grande para llamar la atención sobre aquello a lo que rodea. https://www.w3schools.com/bootstrap/bootstrap_jumbotron_header.asp
+- fetch: En la práctica, 'tomar' datos.
+- $res: Variable utilizada para simplificar variables de resultado más complejas, agilizando el proceso y minimizando los fallos.
 
 **Archivos en el repositorio**
 ------------
-1. **README**           Documentación.
-2. **docker.sh**        Ejecutable de docker+arrancar contenedores
-3. **/src**             Directorio con la estructura php empleada
-4. **/db**              Directorio de script para montar la base de datos "users"
-5. **/apache**          Dockerfile para Apache. Se respeta al autor original.            
+1. **README**               Documentación.
+2. **docker.sh**            Ejecutable de docker+arrancar contenedores
+3. **docker-compose.yml**   Organizador contenedores docker.
+3. **/src**                 Directorio con la estructura php empleada
+4. **/db**                  Directorio de script para montar la base de datos "users"
+5. **/apache**              Dockerfile para Apache. Se respeta al autor original.            
 
 
 **Referencias**
