@@ -10,21 +10,24 @@
 <div class = "container">
 	<div class="jumbotron">
 		<h1 class="display-4">Simple LAMP web app</h1>
-		<p class="lead">Demo app</p>
+		<p class="lead">Final project for IAW</p>
 	</div>
 
 
 <?php
-// including the database connection file
+// NOTA: Interesante abrir 'edit.php' en el lateral, los cambios son similares.
+// Incluimos el archivo de conexiones con la base de datos
 include_once("config.php");
 
 if(isset($_POST['Submit'])) {
 	$name = mysqli_real_escape_string($mysqli, $_POST['name']);
 	$age = mysqli_real_escape_string($mysqli, $_POST['age']);
 	$email = mysqli_real_escape_string($mysqli, $_POST['email']);
+	$apellido1 = mysqli_real_escape_string($mysqli, $_POST['apellido1']);
+	$apellido2 = mysqli_real_escape_string($mysqli, $_POST['apellido2']);
 
-	// checking empty fields
-	if(empty($name) || empty($age) || empty($email)) {
+	// Si hay un campo vacío, avisa.
+	if(empty($name) || empty($age) || empty($email) || empty($apellido1) || empty($apellido2)) {
 		if(empty($name)) {
 			echo "<div class='alert alert-danger' role='alert'>Name field is empty</div>";
 		}
@@ -37,19 +40,27 @@ if(isset($_POST['Submit'])) {
 			echo "<div class='alert alert-danger' role='alert'>Email field is empty</div>";
 		}
 
-		// link to the previous page
+		if(empty($apellido1)) {
+			echo "<font color='red'>apellido1 field is empty.</font><br/>";
+		}
+
+		if(empty($apellido2)) {
+			echo "<font color='red'>apellido2 field is empty.</font><br/>";
+		}
+
+		// Enlace a la página anterior.
 		echo "<a href='javascript:self.history.back();' class='btn btn-primary'>Go Back</a>";
 	} else {
-		// if all the fields are filled (not empty)
+		// Else (Si todos los campos han sido rellenados)
 
-		// insert data to database
-		$stmt = mysqli_prepare($mysqli, "INSERT INTO users(name,age,email) VALUES(?,?,?)");
-		mysqli_stmt_bind_param($stmt, "sis", $name, $age, $email);
+		// Insertar datos a nuestra base de datos.
+		$stmt = mysqli_prepare($mysqli, "INSERT INTO users(name,age,email,apellido1,apellido2) VALUES(?,?,?,?,?)");
+		mysqli_stmt_bind_param($stmt, "sis", $name, $age, $email, $apellido1, $apellido2);
 		mysqli_stmt_execute($stmt);
 		mysqli_stmt_free_result($stmt);
 		mysqli_stmt_close($stmt);
 
-		// display success message
+		// Mensaje de operación con éxito
 		echo "<div class='alert alert-success' role='alert'>Data added successfully</div>";
 		echo "<a href='index.php' class='btn btn-primary'>View Result</a>";
 	}

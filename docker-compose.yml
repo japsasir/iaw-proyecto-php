@@ -4,7 +4,7 @@ services:
   apache:
     build: ./apache
     ports: 
-      - 8181:80
+      - 80:80
     volumes:
       - ./src:/var/www/html
 
