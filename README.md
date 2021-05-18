@@ -7,29 +7,31 @@ Ciclo: CFGS Administración de Sistemas Informáticos en Red
 
 **Introducción**
 ------------
-Esta práctica consiste en un sistema muy básico para añadir, editar, borrar y ver registros de una base de datos, haciendo uso de PHP y MySQL.
+Esta práctica consiste en un sistema muy básico para añadir, editar, borrar y ver registros de una base de datos, haciendo uso de PHP y MySQL. De hecho, se le conoce como CRUD (Create, Read, Update, Delete)
 
-**Secciones**
+Se pueden realizar pruebas en: 
+http://3.80.58.96/
+
+**Líneas y términos de interés**
 ------------
-
-### Usuario
-
-- Al entrar al sitio web se accederá por defecto a la sección de usuario.
-- La página principal del sitio web mostrará un listado de los productos ofertados.
-- De cada producto ofertado se mostrará una imagen y una breve descripción.
-- Cuando se seleccione producto se accederá a una nueva página donde se mostrará una ficha completa con todos los datos del producto seleccionado.
-- Desde la página principal se podrán hacer búsquedas de los productos.
-- Los usuarios podrán ir añadiendo productos al carrito de la compra y finalmente decidir si quieren realizar el pedido o cancelarlo.
-
-
-### Administración
-
+- CRUD: Create, Read, Update, Delete. Un sistema sencillo para trabajar registros de base de datos.
+-
+-
+-
+-
+-
+-
+-
+-
 
 
 **Archivos en el repositorio**
 ------------
 1. **README**           Documentación.
-2. ****        
+2. **docker.sh**        Ejecutable de docker+arrancar contenedores
+3. **/src**             Directorio con la estructura php empleada
+4. **/db**              Directorio de script para montar la base de datos "users"
+5. **/apache**          Dockerfile para Apache. Se respeta al autor original.            
 
 
 **Referencias**
@@ -38,6 +40,8 @@ Esta práctica consiste en un sistema muy básico para añadir, editar, borrar y
 https://josejuansanchez.org/iaw/proyecto-php/index.html
 - Basado en el siguiente repositorio:
 https://github.com/chapagain/crud-php-simple
+- Guía paso a paso para principiantes sobre CRUD (Inglés)
+http://blog.chapagain.com.np/very-simple-add-edit-delete-view-in-php-mysql/
 
 
 **Editor Markdown**

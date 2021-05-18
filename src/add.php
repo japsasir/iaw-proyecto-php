@@ -10,35 +10,26 @@
 <div class = "container">
 	<div class="jumbotron">
 		<h1 class="display-4">Simple LAMP web app</h1>
-		<p class="lead">Final project for IAW</p>
+		<p class="lead">Demo app</p>
 	</div>
 
 
 <?php
-// NOTA: Interesante abrir 'edit.php' en el lateral, los cambios son similares.
-// Incluimos el archivo de conexiones con la base de datos
+// Configuración para conectar con base de datos.
 include_once("config.php");
 
 if(isset($_POST['Submit'])) {
 	$name = mysqli_real_escape_string($mysqli, $_POST['name']);
-	$apellido1 = mysqli_real_escape_string($mysqli, $_POST['apellido1']);
-	$apellido2 = mysqli_real_escape_string($mysqli, $_POST['apellido2']);
 	$age = mysqli_real_escape_string($mysqli, $_POST['age']);
 	$email = mysqli_real_escape_string($mysqli, $_POST['email']);
+	# Campos nuevos
+	$apellido1 = mysqli_real_escape_string($mysqli, $_POST['apellido1']);
+	$apellido2 = mysqli_real_escape_string($mysqli, $_POST['apellido2']);
 
-
-	// Si hay un campo vacío, avisa.
-	if(empty($name) || empty($apellido1) || empty($apellido2) || empty($age) || empty($email)) {
+	// Comprobamos los campos vacíos. Añadimos los nuevos.
+	if(empty($name) || empty($age) || empty($email) || empty($apellido1) || empty($apellido2)) {
 		if(empty($name)) {
 			echo "<div class='alert alert-danger' role='alert'>Name field is empty</div>";
-		}
-
-		if(empty($apellido1)) {
-			echo "<font color='red'>apellido1 field is empty.</font><br/>";
-		}
-
-		if(empty($apellido2)) {
-			echo "<font color='red'>apellido2 field is empty.</font><br/>";
 		}
 
 		if(empty($age)) {
@@ -48,19 +39,28 @@ if(isset($_POST['Submit'])) {
 		if(empty($email)) {
 			echo "<div class='alert alert-danger' role='alert'>Email field is empty</div>";
 		}
-		// Enlace a la página anterior.
+
+		if(empty($apellido1)) {
+			echo "<div class='alert alert-danger' role='alert'>Apellido1 field is empty</div>";
+		}
+
+		if(empty($apellido2)) {
+			echo "<div class='alert alert-danger' role='alert'>Apellido2 field is empty</div>";
+		}
+
+		// Enlace a la página anterior
 		echo "<a href='javascript:self.history.back();' class='btn btn-primary'>Go Back</a>";
 	} else {
-		// Else (Si todos los campos han sido rellenados)
+		// ELSE implica que ninguno de los campos anteriores esta vacio
 
-		// Insertar datos a nuestra base de datos.
-		$stmt = mysqli_prepare($mysqli, "INSERT INTO users(name,age,email,apellido1,apellido2) VALUES(?,?,?,?,?)");
-		mysqli_stmt_bind_param($stmt, "sis", $name, $apellido1, $apellido2 $age, $email);
+		// Inserta los datos a la bae de datos. Ojo al número de datos insertados.
+		$stmt = mysqli_prepare($mysqli, "INSERT INTO users(name, apellido1, apellido2, age, email) VALUES(?,?,?,?,?)");
+		mysqli_stmt_bind_param($stmt, "sssis", $name, $apellido1, $apellido2, $age, $email);
 		mysqli_stmt_execute($stmt);
 		mysqli_stmt_free_result($stmt);
 		mysqli_stmt_close($stmt);
 
-		// Mensaje de operación con éxito
+		// Mensaje de éxito mostrado en pantalla.
 		echo "<div class='alert alert-success' role='alert'>Data added successfully</div>";
 		echo "<a href='index.php' class='btn btn-primary'>View Result</a>";
 	}

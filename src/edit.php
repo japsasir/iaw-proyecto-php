@@ -1,6 +1,6 @@
 <?php
+# Similar a add.php, mirar allí las anotaciones.
 // including the database connection file
-
 include_once("config.php");
 
 if(isset($_POST['update'])) {
@@ -16,7 +16,7 @@ if(isset($_POST['update'])) {
 		if(empty($name)) {
 			echo "<font color='red'>Name field is empty.</font><br/>";
 		}
-
+		
 		if(empty($apellido1)) {
 			echo "<font color='red'>Apellido1 field is empty.</font><br/>";
 		}
@@ -32,11 +32,10 @@ if(isset($_POST['update'])) {
 		if(empty($email)) {
 			echo "<font color='red'>Email field is empty.</font><br/>";
 		}
-
 	} else {
 		// updating the table
-		$stmt = mysqli_prepare($mysqli, "UPDATE users SET name=?,age=?,email=? WHERE id=?");
-		mysqli_stmt_bind_param($stmt, "sisi", $name, $apellido1, $apellido2, $email, $age, $id);
+		$stmt = mysqli_prepare($mysqli, "UPDATE users SET name=?,apellido1=?,apellido2=?,age=?,email=? WHERE id=?");
+		mysqli_stmt_bind_param($stmt, "sssisi", $name, $apellido1, $apellido2, $age, $email, $id);
 		mysqli_stmt_execute($stmt);
 		mysqli_stmt_free_result($stmt);
 		mysqli_stmt_close($stmt);
@@ -52,7 +51,7 @@ if(isset($_POST['update'])) {
 $id = $_GET['id'];
 
 // selecting data associated with this particular id
-$stmt = mysqli_prepare($mysqli, "SELECT name, apellido1, apellido2, age, email, FROM users WHERE id=?");
+$stmt = mysqli_prepare($mysqli, "SELECT name, apellido1, apellido2, age, email FROM users WHERE id=?");
 mysqli_stmt_bind_param($stmt, "i", $id);
 mysqli_stmt_execute($stmt);
 mysqli_stmt_bind_result($stmt, $name, $apellido1, $apellido2, $age, $email);
