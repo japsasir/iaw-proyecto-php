@@ -21,23 +21,16 @@ include_once("config.php");
 
 if(isset($_POST['Submit'])) {
 	$name = mysqli_real_escape_string($mysqli, $_POST['name']);
-	$age = mysqli_real_escape_string($mysqli, $_POST['age']);
-	$email = mysqli_real_escape_string($mysqli, $_POST['email']);
 	$apellido1 = mysqli_real_escape_string($mysqli, $_POST['apellido1']);
 	$apellido2 = mysqli_real_escape_string($mysqli, $_POST['apellido2']);
+	$age = mysqli_real_escape_string($mysqli, $_POST['age']);
+	$email = mysqli_real_escape_string($mysqli, $_POST['email']);
+
 
 	// Si hay un campo vacío, avisa.
-	if(empty($name) || empty($age) || empty($email) || empty($apellido1) || empty($apellido2)) {
+	if(empty($name) || empty($apellido1) || empty($apellido2) || empty($age) || empty($email)) {
 		if(empty($name)) {
 			echo "<div class='alert alert-danger' role='alert'>Name field is empty</div>";
-		}
-
-		if(empty($age)) {
-			echo "<div class='alert alert-danger' role='alert'>Age field is empty</div>";
-		}
-
-		if(empty($email)) {
-			echo "<div class='alert alert-danger' role='alert'>Email field is empty</div>";
 		}
 
 		if(empty($apellido1)) {
@@ -48,6 +41,13 @@ if(isset($_POST['Submit'])) {
 			echo "<font color='red'>apellido2 field is empty.</font><br/>";
 		}
 
+		if(empty($age)) {
+			echo "<div class='alert alert-danger' role='alert'>Age field is empty</div>";
+		}
+
+		if(empty($email)) {
+			echo "<div class='alert alert-danger' role='alert'>Email field is empty</div>";
+		}
 		// Enlace a la página anterior.
 		echo "<a href='javascript:self.history.back();' class='btn btn-primary'>Go Back</a>";
 	} else {
@@ -55,7 +55,7 @@ if(isset($_POST['Submit'])) {
 
 		// Insertar datos a nuestra base de datos.
 		$stmt = mysqli_prepare($mysqli, "INSERT INTO users(name,age,email,apellido1,apellido2) VALUES(?,?,?,?,?)");
-		mysqli_stmt_bind_param($stmt, "sis", $name, $age, $email, $apellido1, $apellido2);
+		mysqli_stmt_bind_param($stmt, "sis", $name, $apellido1, $apellido2 $age, $email);
 		mysqli_stmt_execute($stmt);
 		mysqli_stmt_free_result($stmt);
 		mysqli_stmt_close($stmt);

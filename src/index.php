@@ -25,8 +25,8 @@ $result = mysqli_query($mysqli, "SELECT * FROM users ORDER BY id DESC");
 
 	<tr bgcolor='#CCCCCC'>
 		<td>Name</td>
-		<td>apellido1</td>
-		<td>apellido2</td>
+		<td>Apellido1</td>
+		<td>Apellido2</td>
 		<td>Age</td>
 		<td>Email</td>
 		<td>Update</td>
@@ -36,10 +36,10 @@ $result = mysqli_query($mysqli, "SELECT * FROM users ORDER BY id DESC");
 	while($res = mysqli_fetch_array($result)) {
 		echo "<tr>\n";
 		echo "<td>".$res['name']."</td>\n";
-		echo "<td>".$res['age']."</td>\n";
-		echo "<td>".$res['email']."</td>\n";
 		echo "<td>".$res['apellido1']."</td>\n";
 		echo "<td>".$res['apellido2']."</td>\n";
+		echo "<td>".$res['age']."</td>\n";
+		echo "<td>".$res['email']."</td>\n";
 		echo "<td><a href=\"edit.php?id=$res[id]\">Edit</a> | <a href=\"delete.php?id=$res[id]\" onClick=\"return confirm('Are you sure you want to delete?')\">Delete</a></td>\n";
 		echo "</tr>\n";
 	}
